@@ -20,38 +20,38 @@ while(option != 9){
 
     switch(option){
         case 1:
-            pokemon.ataque+= Math.floor(Math.random() * 7);
-            pokemon.energia-= Math.floor(Math.random() * 12);
-            if(pokemon.energia <= 0){
-                console.log("energia acabou! fim de jogo.");
-            }else{
-                if(pokemon.ataque >100) pokemon.ataque=100;
+            console.log(pokemon.treinarAtaque());
+            if(pokemon.energiaAcabou()){
+                console.log("sem energia! fim de jogo.");
+                option=9;
             }
             break;
         case 2:
-            pokemon.defesa+= Math.floor(Math.random() * 7);
-            pokemon.energia-= Math.floor(Math.random() * 12);
-            if(pokemon.energia <= 0){
-                console.log("energia acabou! fim de jogo.");
-            }else{
-                if(pokemon.defesa >100) pokemon.defesa=100;
+            console.log(pokemon.treinarDefesa());
+            if(pokemon.energiaAcabou()){
+                console.log("sem energia! fim de jogo.");
+                option=9;
             }
             break;
         case 3:
-            console.log(pokemon);
+            console.log(pokemon.status());
             break;
         case 4:
-            pokemon.energia-= Math.floor(Math.random() * 10);
-            if(pokemon.energia<=0) console.log("sem energia! fim de jogo.");
+            console.log(pokemon.batalha());
+            if(pokemon.energiaAcabou()){
+                console.log("sem energia! fim de jogo.");
+                option=9;
+            }
             break;
         case 5:
-            pokemon.energia+= Math.floor(Math.random() * 4);
-            if(pokemon.energia>100) pokemon.energia=100;
+            let horas= +teclado("quantas horas você quer descansa? ");
+            console.log(pokemon.descansa(horas));
             break;
         case 9:
             console.log("saindo...");
             break;
         default:
             console.log("opção invalida!");
+            break;
     }
 }
