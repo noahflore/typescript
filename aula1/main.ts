@@ -7,7 +7,7 @@ let teclado = prompt();
 let option: number = 0;
 
 while(option != 9){
-    console.log("+======== Pokemon =============+");
+    console.log(`+== Pokemon ${pokemon.nome} ===+`);
     console.log("+ 1: treinar o ataque.         +");
     console.log("+ 2: treinar a defesa.         +");
     console.log("+ 3: ver atributos.            +");
