@@ -1,4 +1,5 @@
 import prompt from "prompt-sync"
+import {createProduct} from './src/service/productService'
 
 let produtos: object = [];
 
@@ -7,6 +8,7 @@ console.log("SISTEMA DE ESTOQUE!")
 
 let n=1, texto=`
 | ------- ESCOLHA UMA OPÇÃO ----- |
+| 0: cadastrar um novo produto    |
 | 1: listar todos os produtos     |
 | 2: listar todos disponíveis     |
 | 3: listar todos esgotados       |
@@ -25,6 +27,8 @@ while(n!=9){
     n= +teclado("digite: ")
 
     switch(n){
+        case 0:
+            createProduct();
         case 9:
             
     }
