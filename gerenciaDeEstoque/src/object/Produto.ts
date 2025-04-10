@@ -12,6 +12,7 @@
         this._custoDoLojista= custoDoLojista;
         this._precoFinal= precoFinal;
         this._perecivel= perecivel;
+        this._data= ""
     }
 
     is_perecivel(perecivel: boolean): string{
