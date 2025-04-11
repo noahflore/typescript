@@ -1,4 +1,4 @@
-import { Produto } from '../object/Produto'
+import { Produto } from '../object/Produto';
 const prompt = require('prompt-sync')();
 
 export function createProduct(): Produto {
@@ -25,7 +25,7 @@ export function createProduct(): Produto {
         break;
     }
 
-    // Validação dos preços (todos devem ser números positivos)
+    // Validação dos preços
     precoDeCompra = validarNumero("Digite o preço de fábrica: ");
     custoDoLojista = validarNumero("Digite o custo inicial: ");
     precoFinal = validarNumero("Digite o preço final: ");
@@ -39,7 +39,22 @@ export function createProduct(): Produto {
     // Validação do perecível
     perecivel = validarPerecivel();
 
-    return new Produto(nome, precoDeCompra, custoDoLojista, precoFinal, perecivel);
+    // Cria o produto
+    const produto = new Produto(nome, precoDeCompra, custoDoLojista, precoFinal, perecivel);
+
+    // Se for perecível, solicita data de validade
+    if (perecivel) {
+        while (true) {
+            const dataValidade = prompt("Digite a data de validade (DD/MM/AAAA): ");
+            if (validarData(dataValidade)) {
+                produto.dataValidade = dataValidade;
+                break;
+            }
+            console.log("Formato de data inválido! Use DD/MM/AAAA");
+        }
+    }
+
+    return produto;
 }
 
 // Função auxiliar para validar números
@@ -63,4 +78,19 @@ function validarPerecivel(): boolean {
     }
 }
 
-module.exports = { createProduct };
+// Função para validar data
+function validarData(data: string): boolean {
+    const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!regex.test(data)) return false;
+    
+    const [dia, mes, ano] = data.split('/').map(Number);
+    const dataObj = new Date(ano, mes - 1, dia);
+    
+    return (
+        dataObj.getDate() === dia &&
+        dataObj.getMonth() === mes - 1 &&
+        dataObj.getFullYear() === ano
+    );
+}
+
+export default { createProduct };

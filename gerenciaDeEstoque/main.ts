@@ -1,6 +1,11 @@
 import prompt from "prompt-sync";
 import { createProduct } from './src/service/productService';
 import { Produto } from "./src/object/Produto";
+import { 
+    listarProdutosEmEstoque, 
+    listarProdutosEsgotados,
+    exibirProdutos
+} from './src/service/productList';
 
 const teclado = prompt();
 let produtos: Produto[] = []; // Corrigido para array de Produto
