@@ -4,15 +4,19 @@
     private _custoDoLojista: number;
     private _precoFinal: number;
     private _perecivel: boolean;
-    private _dataValidade?: string;
+    private _dataValidade: string;
     private _quantidade: number;
+    private _disponivel: boolean;
 
-    constructor(nome: string, precoDeCompra: number, custoDoLojista: number, precoFinal: number, perecivel: boolean){
+    constructor(nome: string, precoDeCompra: number, custoDoLojista: number, precoFinal: number, perecivel: boolean, quantidade: number){
         this._nome= nome;
         this._precoDeCompra= precoDeCompra;
         this._custoDoLojista= custoDoLojista;
         this._precoFinal= precoFinal;
         this._perecivel= perecivel;
+        this._dataValidade= ""
+        this._quantidade= quantidade
+        this._disponivel= true
     }
 
     
@@ -56,12 +60,10 @@
         this._dataValidade = v;
     }
 
-    
     public get dataValidade() : string {
         return this._dataValidade
     }
     
-
     get quantidade(): number {
         return this._quantidade;
     }
@@ -69,5 +71,46 @@
     set quantidade(valor: number) {
         this._quantidade = valor >= 0 ? valor : 0;
     }
+
     
+    public set nome(v : string) {
+        this._nome = v;
+    }
+    
+    
+    public get nome() : string {
+        return this._nome
+    }
+    
+    
+    public set precoFinal(v : number) {
+        this._precoFinal = v;
+    }
+    
+    
+    public get precoFinal() : number {
+        return this._precoFinal
+    }
+
+    
+    public set perecivel(v : boolean) {
+        this._perecivel = v;
+    }
+    
+    
+    public get perecivel() : boolean {
+        return this._perecivel
+    }
+    
+    
+    public set disponivel(v : boolean) {
+        this._disponivel = v;
+    }
+    
+    
+    public get disponivel() : boolean {
+        return this._disponivel
+    }
+    
+
 }

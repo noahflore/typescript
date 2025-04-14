@@ -7,6 +7,7 @@ export function createProduct(): Produto {
     let custoDoLojista: number;
     let precoFinal: number;
     let perecivel: boolean;
+    let quantidade: number;  // Nova variável para quantidade
 
     // Validação do nome
     while (true) {
@@ -39,8 +40,18 @@ export function createProduct(): Produto {
     // Validação do perecível
     perecivel = validarPerecivel();
 
-    // Cria o produto
-    const produto = new Produto(nome, precoDeCompra, custoDoLojista, precoFinal, perecivel);
+    // Validação da quantidade
+    quantidade = validarNumero("Digite a quantidade em estoque: ");
+
+    // Cria o produto com a quantidade
+    const produto = new Produto(
+        nome, 
+        precoDeCompra, 
+        custoDoLojista, 
+        precoFinal, 
+        perecivel,
+        quantidade  // Passando a quantidade para o construtor
+    );
 
     // Se for perecível, solicita data de validade
     if (perecivel) {

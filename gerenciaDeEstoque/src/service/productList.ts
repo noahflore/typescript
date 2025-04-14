@@ -1,13 +1,13 @@
 import { Produto } from "../object/Produto";
 
-// Função para listar produtos em estoque (quantidade > 0)
+// Função para listar produtos em estoque (disponivel true)
 export function listarProdutosEmEstoque(produtos: Produto[]): Produto[] {
-    return produtos.filter(produto => produto.quantidade > 0);
+    return produtos.filter(produto => produto.disponivel == true);
 }
 
-// Função para listar produtos esgotados (quantidade === 0)
+// Função para listar produtos esgotados (disponivel == false)
 export function listarProdutosEsgotados(produtos: Produto[]): Produto[] {
-    return produtos.filter(produto => produto.quantidade === 0);
+    return produtos.filter(produto => produto.disponivel == false);
 }
 
 // Função para exibir produtos formatados
@@ -26,4 +26,10 @@ export function exibirProdutos(produtos: Produto[]): void {
         --------------------------
         `);
     });
+}
+
+module.exports = {
+    listarProdutosEmEstoque,
+    listarProdutosEsgotados,
+    exibirProdutos
 }
