@@ -29,14 +29,6 @@ const textoMenu = `
 let opcao = 11;
 
 while (opcao !== 9) {
-    console.log(textoMenu);
-    const input = teclado("Digite uma opção: ");
-    opcao = parseInt(input, 10);
-
-    if (isNaN(opcao)) {
-        console.log("Por favor, digite um número válido!");
-        continue;
-    }
 
     switch (opcao) {
         case 0:
@@ -45,12 +37,28 @@ while (opcao !== 9) {
             console.log("Produto cadastrado com sucesso!");
             break;
         case 1:
-            console.log("Lista de produtos:", produtos);
+            console.log("Lista de produtos:", exibirProdutos(produtos));
+            teclado("pressiona qualquer teclar para continua.")
             break;
+        case 2:
+            console.log("produto(s) em estoque: ", listarProdutosEmEstoque(produtos))
+            break
+        case 3:
+            console.log("produto(s) esgotado(s): ", listarProdutosEsgotados(produtos))
+            break
         case 9:
             console.log("Saindo...");
             break;
         default:
             console.log("Opção ainda não implementada");
+    }
+
+    console.log(textoMenu);
+    const input = teclado("Digite uma opção: ");
+    opcao = parseInt(input, 10);
+
+    if (isNaN(opcao)) {
+        console.log("Por favor, digite um número válido!");
+        continue;
     }
 }
