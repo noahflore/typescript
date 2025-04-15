@@ -1,5 +1,5 @@
 import prompt from "prompt-sync";
-import { createProduct } from './src/service/productService';
+import { createProduct, moreProduct, lowProduct } from './src/service/productService';
 import { Produto } from "./src/object/Produto";
 import { 
     listarProdutosEmEstoque, 
@@ -45,6 +45,12 @@ while (opcao !== 9) {
             break
         case 3:
             console.log("produto(s) esgotado(s): ", listarProdutosEsgotados(produtos))
+            break
+        case 4:
+            moreProduct(produtos)
+            break
+        case 5:
+            lowProduct(produtos)
             break
         case 9:
             console.log("Saindo...");

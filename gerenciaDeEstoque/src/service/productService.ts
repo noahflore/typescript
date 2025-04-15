@@ -68,6 +68,106 @@ export function createProduct(): Produto {
     return produto;
 }
 
+export function moreProduct(produtos: Produto[]): void {
+    // Verifica se há produtos cadastrados
+    if (produtos.length === 0) {
+        console.log("Nenhum produto cadastrado!");
+        return;
+    }
+
+    // Lista todos os produtos disponíveis
+    console.log("\nLista de Produtos:");
+    produtos.forEach((produto, index) => {
+        console.log(`${index} - ${produto.nome} (Quantidade: ${produto.quantidade})`);
+    });
+
+    // Solicita seleção do produto
+    const produtoIndex = Number(prompt("\nDigite o número do produto que deseja alterar: "));
+    
+    // Valida a seleção
+    if (isNaN(produtoIndex) || produtoIndex < 0 || produtoIndex >= produtos.length) {
+        console.log("Seleção inválida!");
+        return;
+    }
+
+    // Solicita a quantidade a adicionar
+    const quantidade = Number(prompt("Digite a quantidade a adicionar: "));
+    
+    // Valida a quantidade
+    if (isNaN(quantidade) || quantidade <= 0) {
+        console.log("Quantidade deve ser maior que zero!");
+        return;
+    }
+
+    // Atualiza o estoque
+    const produtoSelecionado = produtos[produtoIndex];
+    produtoSelecionado.quantidade += quantidade;
+    
+    // Atualiza disponibilidade se necessário
+    if (produtoSelecionado.quantidade > 0 && !produtoSelecionado.disponivel) {
+        produtoSelecionado.disponivel = true;
+    }
+
+    console.log(`\nEstoque de "${produtoSelecionado.nome}" atualizado com sucesso!`);
+    console.log(`Nova quantidade: ${produtoSelecionado.quantidade}`);
+}
+
+// Função equivalente para diminuir estoque (lowProduct)
+export function lowProduct(produtos: Produto[]): void {
+    if (produtos.length === 0) {
+        console.log("Nenhum produto cadastrado!");
+        return;
+    }
+
+    console.log("\nLista de Produtos:");
+    produtos.forEach((produto, index) => {
+        console.log(`${index} - ${produto.nome} (Quantidade: ${produto.quantidade})`);
+    });
+
+    const produtoIndex = Number(prompt("\nDigite o número do produto que deseja alterar: "));
+    
+    if (isNaN(produtoIndex) || produtoIndex < 0 || produtoIndex >= produtos.length) {
+        console.log("Seleção inválida!");
+        return;
+    }
+
+    const produtoSelecionado = produtos[produtoIndex];
+    
+    // Verifica se o produto está disponível
+    if (produtoSelecionado.quantidade <= 0) {
+        console.log(`O produto "${produtoSelecionado.nome}" está esgotado!`);
+        return;
+    }
+
+    const quantidade = Number(prompt(`Digite a quantidade a remover (disponível: ${produtoSelecionado.quantidade}): `));
+    
+    if (isNaN(quantidade)) {
+        console.log("Quantidade inválida!");
+        return;
+    }
+
+    if (quantidade <= 0) {
+        console.log("Quantidade deve ser maior que zero!");
+        return;
+    }
+
+    if (quantidade > produtoSelecionado.quantidade) {
+        console.log(`Quantidade insuficiente! Disponível: ${produtoSelecionado.quantidade}`);
+        return;
+    }
+
+    produtoSelecionado.quantidade -= quantidade;
+    
+    // Atualiza disponibilidade se estoque zerar
+    if (produtoSelecionado.quantidade === 0) {
+        produtoSelecionado.disponivel = false;
+        console.log("\nATENÇÃO: Estoque zerado!");
+    }
+
+    console.log(`\nEstoque de "${produtoSelecionado.nome}" atualizado com sucesso!`);
+    console.log(`Nova quantidade: ${produtoSelecionado.quantidade}`);
+}
+
 // Função auxiliar para validar números
 function validarNumero(mensagem: string): number {
     while (true) {
@@ -104,4 +204,4 @@ function validarData(data: string): boolean {
     );
 }
 
-export default { createProduct };
+module.exports = { createProduct, moreProduct, lowProduct };
