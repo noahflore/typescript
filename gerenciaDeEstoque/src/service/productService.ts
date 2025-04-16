@@ -168,6 +168,42 @@ export function lowProduct(produtos: Produto[]): void {
     console.log(`Nova quantidade: ${produtoSelecionado.quantidade}`);
 }
 
+export function deleteProduct(products: Produto[]): void {
+    // Check if there are any products
+    if (products.length === 0) {
+        console.log("No products registered!");
+        return;
+    }
+
+    // List all available products
+    console.log("\nProduct List:");
+    products.forEach((product, index) => {
+        console.log(`${index} - ${product.nome} (Quantity: ${product.quantidade})`);
+    });
+
+    // Ask for product selection
+    const productIndex = Number(prompt("\nEnter the number of the product you want to delete: "));
+    
+    // Validate selection
+    if (isNaN(productIndex) || productIndex < 0 || productIndex >= products.length) {
+        console.log("Invalid selection!");
+        return;
+    }
+
+    // Get confirmation
+    const productToDelete = products[productIndex];
+    const confirmation = prompt(`Are you sure you want to delete "${productToDelete.nome}"? This action cannot be undone. (Y/N): `).toUpperCase();
+    
+    if (confirmation !== 'Y') {
+        console.log("Deletion canceled.");
+        return;
+    }
+
+    // Remove product from array
+    products.splice(productIndex, 1);
+    console.log(`\nProduct "${productToDelete.nome}" has been successfully deleted!`);
+}
+
 // Função auxiliar para validar números
 function validarNumero(mensagem: string): number {
     while (true) {
@@ -204,4 +240,4 @@ function validarData(data: string): boolean {
     );
 }
 
-module.exports = { createProduct, moreProduct, lowProduct };
+module.exports = { createProduct, moreProduct, lowProduct, deleteProduct };
