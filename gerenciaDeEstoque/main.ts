@@ -1,6 +1,9 @@
 import prompt from "prompt-sync";
 import { createProduct, moreProduct, lowProduct, deleteProduct } from './src/service/productService';
+import { createClient } from "./src/service/clientService";
 import { Produto } from "./src/object/Produto";
+import { Cliente } from "./src/object/Cliente"
+import { listAllClients } from "./src/service/clientListService";
 import { 
     listarProdutosEmEstoque, 
     listarProdutosEsgotados,
@@ -9,6 +12,7 @@ import {
 
 const teclado = prompt();
 let produtos: Produto[] = []; // Corrigido para array de Produto
+let clientes: Cliente[] = [];
 
 console.log("SISTEMA DE ESTOQUE!");
 
@@ -54,6 +58,15 @@ while (opcao !== 9) {
             break
         case 6:
             deleteProduct(produtos)
+            break
+        case 7:
+            const novoCliente = createClient();
+            clientes.push(novoCliente);
+            console.log("Cliente cadastrado com sucesso!");
+            break;
+        case 8:
+            listAllClients(clientes);
+            break;
         case 9:
             console.log("Saindo...");
             break;
