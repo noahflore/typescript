@@ -7,53 +7,55 @@ export function createProduct(): Produto {
     let custoDoLojista: number;
     let precoFinal: number;
     let perecivel: boolean;
-    let quantidade: number;  // Nova variável para quantidade
+    let quantidade: number;
 
-    // Validação do nome
+    // Validação do nome (mantida igual)
     while (true) {
         nome = prompt("Digite o nome: ").trim();
-        
         if (nome.length < 2) {
             console.log("Nome muito curto (mínimo 2 caracteres)");
             continue;
         }
-        
         if (/\d/.test(nome)) {
             console.log("O nome não pode conter números");
             continue;
         }
-        
         break;
     }
 
-    // Validação dos preços
-    precoDeCompra = validarNumero("Digite o preço de fábrica: ");
-    custoDoLojista = validarNumero("Digite o custo inicial: ");
-    precoFinal = validarNumero("Digite o preço final: ");
-
-    // Validação adicional para preço final
-    if (precoFinal <= custoDoLojista) {
-        console.log("O preço final deve ser maior que o custo inicial!");
-        return createProduct(); // Recursão para reiniciar
+    // Validação dos preços com novas regras
+    while (true) {
+        precoDeCompra = validarNumero("Digite o preço de fábrica: ");
+        custoDoLojista = validarNumero("Digite o custo inicial (deve ser ≥ preço de fábrica): ");
+        
+        if (custoDoLojista >= precoDeCompra) {
+            break;
+        }
+        console.log("O custo inicial deve ser igual ou maior que o preço de fábrica!");
     }
 
-    // Validação do perecível
-    perecivel = validarPerecivel();
+    // Validação do preço final (mantida com ajuste na mensagem)
+    while (true) {
+        precoFinal = validarNumero("Digite o preço final (deve ser > custo inicial): ");
+        if (precoFinal > custoDoLojista) {
+            break;
+        }
+        console.log("O preço final deve ser maior que o custo inicial!");
+    }
 
-    // Validação da quantidade
+    // Restante do código mantido igual
+    perecivel = validarPerecivel();
     quantidade = validarNumero("Digite a quantidade em estoque: ");
 
-    // Cria o produto com a quantidade
     const produto = new Produto(
         nome, 
         precoDeCompra, 
         custoDoLojista, 
         precoFinal, 
         perecivel,
-        quantidade  // Passando a quantidade para o construtor
+        quantidade
     );
 
-    // Se for perecível, solicita data de validade
     if (perecivel) {
         while (true) {
             const dataValidade = prompt("Digite a data de validade (DD/MM/AAAA): ");

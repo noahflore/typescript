@@ -111,6 +111,16 @@
     public get disponivel() : boolean {
         return this._disponivel
     }
+
+    
+    public set custoDoLojista(v : number) {
+        this._custoDoLojista = v;
+    }
+    
+    
+    public get custoDoLojista() : number {
+        return this._custoDoLojista
+    }
     
 
 }
