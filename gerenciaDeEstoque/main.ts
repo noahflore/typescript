@@ -47,15 +47,15 @@ while (opcao !== 9) {
             console.log("Produto cadastrado com sucesso!");
             break;
         case 1:
-            console.log("Lista de produtos:", exibirProdutos(produtos));
+            exibirProdutos(produtos);
             teclado("pressiona qualquer teclar para continua.")
             break;
         case 2:
-            console.log("produto(s) em estoque: ", listarProdutosEmEstoque(produtos))
+            listarProdutosEmEstoque(produtos);
             teclado("pressiona qualquer teclar para continua.")
             break
         case 3:
-            console.log("produto(s) esgotado(s): ", listarProdutosEsgotados(produtos))
+            listarProdutosEsgotados(produtos);
             teclado("pressiona qualquer teclar para continua.")
             break
         case 4:
