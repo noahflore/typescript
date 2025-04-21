@@ -171,39 +171,41 @@ export function lowProduct(produtos: Produto[]): void {
 }
 
 export function deleteProduct(products: Produto[]): void {
-    // Check if there are any products
+    // Verifica se há produtos cadastrados
     if (products.length === 0) {
-        console.log("No products registered!");
+        console.log("\n⚠️ Nenhum produto cadastrado!");
         return;
     }
 
-    // List all available products
-    console.log("\nProduct List:");
+    // Lista todos os produtos disponíveis
+    console.log("\n📋 LISTA DE PRODUTOS:");
+    console.log("==================================");
     products.forEach((product, index) => {
-        console.log(`${index} - ${product.nome} (Quantity: ${product.quantidade})`);
+        console.log(`${index} - ${product.nome} (Quantidade: ${product.quantidade})`);
     });
+    console.log("==================================");
 
-    // Ask for product selection
-    const productIndex = Number(prompt("\nEnter the number of the product you want to delete: "));
+    // Solicita seleção do produto
+    const productIndex = Number(prompt("\nDigite o número do produto que deseja excluir: "));
     
-    // Validate selection
+    // Valida a seleção
     if (isNaN(productIndex) || productIndex < 0 || productIndex >= products.length) {
-        console.log("Invalid selection!");
+        console.log("\n❌ Seleção inválida! Digite um número da lista.");
         return;
     }
 
-    // Get confirmation
+    // Solicita confirmação
     const productToDelete = products[productIndex];
-    const confirmation = prompt(`Are you sure you want to delete "${productToDelete.nome}"? This action cannot be undone. (Y/N): `).toUpperCase();
+    const confirmation = prompt(`Tem certeza que deseja excluir "${productToDelete.nome}"? Esta ação não pode ser desfeita. (S/N): `).toUpperCase();
     
-    if (confirmation !== 'Y') {
-        console.log("Deletion canceled.");
+    if (confirmation !== 'S') {
+        console.log("\n🚫 Exclusão cancelada.");
         return;
     }
 
-    // Remove product from array
+    // Remove o produto do array
     products.splice(productIndex, 1);
-    console.log(`\nProduct "${productToDelete.nome}" has been successfully deleted!`);
+    console.log(`\n✅ Produto "${productToDelete.nome}" foi excluído com sucesso!`);
 }
 
 // Função auxiliar para validar números
